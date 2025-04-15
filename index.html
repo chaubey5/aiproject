@@ -1,41 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SciMath AI Tutor</title>
+    <title>Fashion Trend Tracker</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #10b981;
+            --primary-color: #ff4081;
+            --secondary-color: #9c27b0;
             --accent-color: #6366f1;
-            --light-bg: #f3f4f6;
-            --dark-bg: #1f2937;
-            --text-light: #f9fafb;
-            --text-dark: #1f2937;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --light-bg: #fcf8fb;
+            --dark-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-dark: #2d2d2d;
+            --gradient: linear-gradient(135deg, #ff4081 0%, #9c27b0 100%);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-        
+
         body {
             background-color: var(--light-bg);
             color: var(--text-dark);
             transition: all 0.3s ease;
         }
-        
+
         .dark-mode {
             background-color: var(--dark-bg);
             color: var(--text-light);
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -45,7 +48,7 @@
             gap: 1rem;
             height: 100vh;
         }
-        
+
         header {
             grid-column: span 2;
             display: flex;
@@ -55,26 +58,29 @@
             border-bottom: 1px solid #e5e7eb;
             margin-bottom: 1rem;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             font-weight: 700;
             font-size: 1.5rem;
-            color: var(--primary-color);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
+
         .controls {
             display: flex;
             gap: 1rem;
         }
-        
+
         .btn {
             padding: 0.5rem 1rem;
             border: none;
-            border-radius: 0.375rem;
-            background-color: var(--primary-color);
+            border-radius: var(--border-radius);
+            background: var(--gradient);
             color: white;
             font-weight: 500;
             cursor: pointer;
@@ -83,22 +89,15 @@
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .btn:hover {
             opacity: 0.9;
+            transform: translateY(-2px);
         }
-        
-        .btn-secondary {
-            background-color: var(--secondary-color);
-        }
-        
-        .btn-accent {
-            background-color: var(--accent-color);
-        }
-        
+
         .sidebar {
             background-color: white;
-            border-radius: 0.5rem;
+            border-radius: var(--border-radius);
             padding: 1rem;
             box-shadow: var(--shadow);
             display: flex;
@@ -107,11 +106,7 @@
             height: calc(100vh - 100px);
             overflow-y: auto;
         }
-        
-        .dark-mode .sidebar {
-            background-color: #374151;
-        }
-        
+
         .side-section {
             border-bottom: 1px solid #e5e7eb;
             padding-bottom: 1rem;
@@ -127,7 +122,7 @@
             color: var(--primary-color);
         }
         
-        .subject-btn {
+        .category-btn {
             display: block;
             width: 100%;
             text-align: left;
@@ -140,12 +135,12 @@
             color: inherit;
         }
         
-        .subject-btn:hover {
+        .category-btn:hover {
             background-color: #f3f4f6;
         }
         
-        .dark-mode .subject-btn:hover {
-            background-color: #4b5563;
+        .dark-mode .category-btn:hover {
+            background-color: #3d3d3d;
         }
         
         .note-item {
@@ -160,7 +155,7 @@
         }
         
         .dark-mode .note-item {
-            background-color: #4b5563;
+            background-color: #3d3d3d;
         }
         
         .note-item:hover {
@@ -168,7 +163,7 @@
         }
         
         .dark-mode .note-item:hover {
-            background-color: #6b7280;
+            background-color: #4d4d4d;
         }
         
         .note-delete {
@@ -191,7 +186,7 @@
         }
         
         .dark-mode .history-item {
-            background-color: #4b5563;
+            background-color: #3d3d3d;
         }
         
         .history-item:hover {
@@ -199,7 +194,11 @@
         }
         
         .dark-mode .history-item:hover {
-            background-color: #6b7280;
+            background-color: #4d4d4d;
+        }
+
+        .dark-mode .sidebar {
+            background-color: #2d2d2d;
         }
         
         .chat-container {
@@ -207,13 +206,13 @@
             flex-direction: column;
             height: calc(100vh - 100px);
             background-color: white;
-            border-radius: 0.5rem;
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             overflow: hidden;
         }
         
         .dark-mode .chat-container {
-            background-color: #374151;
+            background-color: #2d2d2d;
         }
         
         .chat-header {
@@ -251,63 +250,64 @@
         }
         
         .message {
+            position: relative;
             max-width: 70%;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
             line-height: 1.5;
+            animation: slideIn 0.3s ease-out;
+            transition: transform 0.2s ease;
         }
         
         .user-message {
             align-self: flex-end;
-            background-color: var(--primary-color);
+            background: var(--gradient);
             color: white;
-            border-bottom-right-radius: 0;
         }
         
         .ai-message {
             align-self: flex-start;
             background-color: #f3f4f6;
             color: var(--text-dark);
-            border-bottom-left-radius: 0;
         }
         
         .dark-mode .ai-message {
-            background-color: #4b5563;
+            background-color: #3d3d3d;
             color: var(--text-light);
         }
         
         .chat-input {
             display: flex;
-            padding: 30px;
+            padding: 1rem;
             border-top: 1px solid #e5e7eb;
             background-color: white;
         }
         
         .dark-mode .chat-input {
-            background-color: #374151;
+            background-color: #2d2d2d;
         }
         
         #user-input {
             flex: 1;
             padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
+            border: 2px solid var(--accent-color);
+            border-radius: var(--border-radius);
             outline: none;
             font-size: 1rem;
-            background-color: white;
-            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+        
+        #user-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(255, 64, 129, 0.3);
         }
         
         .dark-mode #user-input {
-            background-color: #4b5563;
+            background-color: #3d3d3d;
             color: var(--text-light);
-            border-color: #6b7280;
+            border-color: #4d4d4d;
         }
-        
-        #send-btn {
-            margin-left: 0.5rem;
-        }
-        
+
         .hidden {
             display: none;
         }
@@ -361,7 +361,7 @@
         }
         
         .dark-mode .modal-content {
-            background-color: #374151;
+            background-color: #2d2d2d;
         }
         
         .modal-header {
@@ -398,9 +398,9 @@
         }
         
         .dark-mode .form-input {
-            background-color: #4b5563;
+            background-color: #3d3d3d;
             color: var(--text-light);
-            border-color: #6b7280;
+            border-color: #4d4d4d;
         }
         
         .form-btn {
@@ -417,6 +417,50 @@
         
         .form-btn:hover {
             opacity: 0.9;
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gradient);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        .trend-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 0.75rem;
+            margin-right: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .trend-image {
+            max-width: 100%;
+            border-radius: 0.375rem;
+            margin: 0.5rem 0;
+        }
+
+        .trend-card {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
         }
         
         /* Responsive */
@@ -447,37 +491,16 @@
                 max-width: 85%;
             }
         }
-        
-        /* Math formatting */
-        .math {
-            font-family: 'Times New Roman', serif;
-            font-style: italic;
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-        
-        .formula {
-            background-color: #f8fafc;
-            padding: 0.5rem;
-            border-radius: 0.25rem;
-            overflow-x: auto;
-            margin: 0.5rem 0;
-        }
-        
-        .dark-mode .formula {
-            background-color: #1e293b;
-        }
-        
-        /* Code formatting */
-        .code {
-            background-color: #f1f5f9;
-            padding: 0.5rem;
-            border-radius: 0.25rem;
-            font-family: monospace;
-            overflow-x: auto;
-            margin: 0.5rem 0;
-        }
-        
-        .dark-mode .code {
-            background-color: #0f172a;
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -485,194 +508,138 @@
     <div class="container">
         <header>
             <div class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/>
                 </svg>
-                SciMath AI Tutor
+                Fashion Pulse
             </div>
             <div class="controls">
                 <button id="theme-toggle" class="btn">
-                    <svg id="light-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    <svg id="light-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                     </svg>
-                    <svg id="dark-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <svg id="dark-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                     </svg>
                     <span id="theme-text">Dark Mode</span>
                 </button>
-                <button id="add-note" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                    Add Note
-                </button>
-                <button id="clear-chat" class="btn btn-accent">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 6h18"></path>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    </svg>
-                    Clear Chat
-                </button>
-                <button id="menu-toggle" class="btn hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                    Menu
-                </button>
+                <button id="add-note" class="btn">Save Trend</button>
+                <button id="clear-chat" class="btn">Clear Chat</button>
             </div>
         </header>
-        
+
         <aside class="sidebar">
-   
             <div class="side-section">
-                <h3>Your Notes</h3>
-                <div id="notes-list">
-                    <!-- Notes will be dynamically added here -->
-                </div>
+                <h3>Trend Categories</h3>
+                <button class="category-btn" data-category="womens">Women's Fashion</button>
+                <button class="category-btn" data-category="mens">Men's Fashion</button>
+                <button class="category-btn" data-category="streetwear">Streetwear</button>
+                <button class="category-btn" data-category="luxury">Luxury</button>
             </div>
             
             <div class="side-section">
-                <h3>Chat History</h3>
-                <div id="history-list">
-                    <!-- History items will be dynamically added here -->
-                </div>
+                <h3>Saved Trends</h3>
+                <div id="notes-list"></div>
             </div>
+            
+            <!-- Chat History section will be added dynamically -->
         </aside>
-        
+
         <main class="chat-container">
-            <div class="chat-header">
-                <span>Science & Math AI Tutor</span>
-                <div class="status">
-                    <span class="status-indicator"></span>
-                    <span>Online</span>
-                </div>
-            </div>
-            
             <div class="messages" id="messages">
-                <!-- Messages will be dynamically added here -->
+                <div class="message ai-message">
+                    Welcome to Fashion Pulse! 🌟 Discover the latest trends, get styling tips, 
+                    and explore fashion insights. Try asking about seasonal trends or specific styles!
+                </div>
             </div>
             
             <form class="chat-input" id="chat-form">
-                <input type="text" id="user-input" placeholder="Ask me anything about science or math..." autocomplete="off">
-                <button type="submit" id="send-btn" class="btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                    </svg>
-                </button>
+                <input type="text" id="user-input" placeholder="Ask about fashion trends...">
+                <button type="submit" class="btn">Send</button>
             </form>
+            
+            <div class="fab" id="trend-prediction">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/>
+                </svg>
+            </div>
         </main>
     </div>
     
-    <!-- Add Note Modal -->
+    <!-- Note Modal -->
     <div class="modal" id="note-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Add New Note</h3>
+                <h3>Save Fashion Trend</h3>
                 <button class="close-modal" id="close-note-modal">&times;</button>
             </div>
             <form id="note-form">
                 <div class="form-group">
                     <label for="note-title" class="form-label">Title</label>
-                    <input type="text" id="note-title" class="form-input" placeholder="Enter note title" required>
+                    <input type="text" id="note-title" class="form-input" placeholder="e.g. Summer 2024 Color Trends" required>
                 </div>
                 <div class="form-group">
-                    <label for="note-content" class="form-label">Content</label>
-                    <textarea id="note-content" class="form-input" rows="5" placeholder="Enter note content" required></textarea>
+                    <label for="note-content" class="form-label">Details</label>
+                    <textarea id="note-content" class="form-input" rows="4" placeholder="Write trend details here..." required></textarea>
                 </div>
-                <button type="submit" class="form-btn">Save Note</button>
+                <button type="submit" class="form-btn">Save Trend</button>
             </form>
         </div>
     </div>
-    
-    <!-- Toast Notification -->
+
     <div class="toast" id="toast"></div>
-    
+
     <script>
         // Global variables
         const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyA2D4LBa47Am8PT2ozqFYM_vj2XNlUi3FE";
         let chatHistory = [];
         let notes = [];
         
-        // AI Tutor custom prompt
-        const SYSTEM_PROMPT = `You are an advanced Science and Mathematics AI tutor. Follow these guidelines:
+        // Create menu toggle button for mobile
+        const menuToggle = document.createElement('button');
+        menuToggle.id = 'menu-toggle';
+        menuToggle.className = 'btn hidden';
+        menuToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
+        document.querySelector('.controls').prepend(menuToggle);
+        
+        // Create history list
+        const historyList = document.createElement('div');
+        historyList.id = 'history-list';
+        const historySection = document.createElement('div');
+        historySection.className = 'side-section';
+        historySection.innerHTML = '<h3>Chat History</h3>';
+        historySection.appendChild(historyList);
+        document.querySelector('.sidebar').appendChild(historySection);
+        
+        // Fashion Trend Tracker custom prompt
+        const SYSTEM_PROMPT = `You are a Fashion Trend Tracker AI, an expert on the latest fashion trends worldwide. Follow these guidelines:
 
-1. For force-related questions:
-   - Give a 1-sentence definition.
-   - List 4 key effects using bullet points (just hyphens or <ul><li> if needed).
-   - Add 3 essential characteristics clearly.
-   - Keep answers under 50 words unless asked for more detail.
-   - Never use Markdown syntax like **bold**,
-   - Bullets using <ul><li>...</li></ul>
-   - Bold using <strong>...</strong>
-   - No markdown (* or ** or _)
+1. For trend-related questions:
+   - Provide a concise trend description.
+   - List 3-4 key pieces or styles with bullet points.
+   - Mention relevant designers, brands, or celebrities.
+   - Share styling tips and seasonal relevance.
 
+2. For specific fashion categories (women's, men's, streetwear, etc.):
+   - Focus on the latest trends in that category.
+   - Suggest outfit combinations.
+   - Recommend accessible brands at different price points.
 
-2. General rules:
-   - Be clear and concise
-   - Use bullet points for lists
-   - Format math as: F=ma
-   - Support with examples when requested`;
+3. General rules:
 
-// Example API call with prompt engineering
-async function getForceExplanation() {
-  const userQuestion = "What is force?";
-  
-  const conversation = [
-    {
-      role: 'model',
-      parts: [{ text: SYSTEM_PROMPT }]
-    },
-    {
-      role: 'user',
-      parts: [{ text: userQuestion }]
-    }
-  ];
-
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      contents: conversation,
-      generationConfig: {
-        temperature: 0.3,  // Lower for more precise answers
-        maxOutputTokens: 100  // Limits response length
-      }
-    })
-  });
-
-  const data = await response.json();
-  return data.candidates[0].content.parts[0].text;
-}
-
-// Sample output will now be concise:
-/*
-Force is a push or pull that changes an object's motion.
-Effects:
-- Makes stationary objects move
-- Stops moving objects
-- Changes direction/speed
-- Can deform objects
-Key traits:
-- Vector quantity (magnitude+direction)
-- Measured in Newtons
-- Follows F=ma
-*/
+   - Be conversational and enthusiastic about fashion.
+   - Use fashion terminology appropriately.
+   - When mentioning colors, describe them precisely (e.g., "sage green" not just "green").
+   - Reference relevant fashion weeks, runway shows, or celebrity style moments.
+   - Suggest sustainable alternatives when applicable.`;
 
         // DOM Elements
         const messagesContainer = document.getElementById('messages');
@@ -689,10 +656,8 @@ Key traits:
         const notesList = document.getElementById('notes-list');
         const clearChatBtn = document.getElementById('clear-chat');
         const toast = document.getElementById('toast');
-        const menuToggle = document.getElementById('menu-toggle');
         const sidebar = document.querySelector('.sidebar');
-        const subjectBtns = document.querySelectorAll('.subject-btn');
-        const historyList = document.getElementById('history-list');
+        const categoryBtns = document.querySelectorAll('.category-btn');
         
         // Initialize the app
         function init() {
@@ -713,19 +678,16 @@ Key traits:
                 // Render the last conversation
                 const lastConversation = findLastConversation();
                 if (lastConversation && lastConversation.length > 0) {
+                    // Clear the welcome message
+                    messagesContainer.innerHTML = '';
+                    
                     lastConversation.forEach(msg => {
                         addMessage(msg.role === 'user' ? 'user' : 'ai', msg.content);
                     });
-                } else {
-                    // Add welcome message if no history
-                    addMessage('ai', "Hey! I'm your Science and Mathematics tutor. I'm here to help you understand complex concepts, solve problems, and explore the fascinating world of science and math. What would you like to learn about today?");
                 }
-            } else {
-                // Add welcome message if no history
-                addMessage('ai', "Hey! I'm your Science and Mathematics tutor. I'm here to help you understand complex concepts, solve problems, and explore the fascinating world of science and math. What would you like to learn about today?");
             }
             
-            // Load notes
+            // Load notes (saved trends)
             const savedNotes = localStorage.getItem('notes');
             if (savedNotes) {
                 notes = JSON.parse(savedNotes);
@@ -753,11 +715,11 @@ Key traits:
         clearChatBtn.addEventListener('click', clearChat);
         menuToggle.addEventListener('click', toggleSidebar);
         
-        // Add event listeners to subject buttons
-        subjectBtns.forEach(btn => {
+        // Add event listeners to category buttons
+        categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                const subject = btn.dataset.subject;
-                handleSubjectClick(subject);
+                const category = btn.dataset.category;
+                handleCategoryClick(category);
                 if (window.innerWidth <= 768) {
                     toggleSidebar();
                 }
@@ -767,20 +729,20 @@ Key traits:
         // Handle document clicks (event delegation)
         function handleDocumentClick(e) {
             // Handle note deletion
-            if (e.target.classList.contains('note-delete')) {
+            if (e.target.classList.contains('note-delete') || e.target.closest('.note-delete')) {
                 const noteId = e.target.closest('.note-item').dataset.id;
                 deleteNote(noteId);
                 e.stopPropagation(); // Prevent opening the note
             }
             
             // Handle note item click
-            if (e.target.closest('.note-item') && !e.target.classList.contains('note-delete')) {
+            else if (e.target.closest('.note-item')) {
                 const noteId = e.target.closest('.note-item').dataset.id;
                 viewNote(noteId);
             }
             
             // Handle history item click
-            if (e.target.closest('.history-item')) {
+            else if (e.target.closest('.history-item')) {
                 const historyId = e.target.closest('.history-item').dataset.id;
                 loadConversation(historyId);
                 if (window.innerWidth <= 768) {
@@ -789,263 +751,263 @@ Key traits:
             }
         }
         
+        // Handle category button click
+        function handleCategoryClick(category) {
+            let query = "";
+            
+            switch(category) {
+                case "womens":
+                    query = "What are the latest women's fashion trends this season?";
+                    break;
+                case "mens":
+                    query = "What are the latest men's fashion trends this season?";
+                    break;
+                case "streetwear":
+                    query = "What are the popular streetwear trends right now?";
+                    break;
+                case "luxury":
+                    query = "What are the current luxury fashion trends?";
+                    break;
+                default:
+                    query = "What are the biggest fashion trends right now?";
+            }
+            
+            // Set the input value and submit the form
+            userInput.value = query;
+            chatForm.dispatchEvent(new Event('submit'));
+        }
+        
         // Handle Chat Submit
         async function handleChatSubmit(e) {
-    e.preventDefault();
-    const message = userInput.value.trim();
-    if (!message) return;
-    
-    // Add user message to UI
-    addMessage('user', message);
-    userInput.value = '';
-    
-    // Show typing indicator
-    const typingIndicator = document.createElement('div');
-    typingIndicator.classList.add('message', 'ai-message');
-    typingIndicator.id = 'typing-indicator';
-    typingIndicator.textContent = 'Thinking...';
-    messagesContainer.appendChild(typingIndicator);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    
-    try {
-        // Prepare context from chat history (last 10 messages)
-        const recentMessages = chatHistory.slice(-10).map(msg => {
-            return {
-                role: msg.role === 'user' ? 'user' : 'model',
-                parts: [{ text: msg.content }]
-            };
-        });
-        
-        // Add system prompt
-        const conversation = [
-            {
-                role: 'model',
-                parts: [{ text: SYSTEM_PROMPT }]
-            },
-            ...recentMessages,
-            {
-                role: 'user',
-                parts: [{ text: message }]
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (!message) return;
+            
+            // Add user message to UI
+            addMessage('user', message);
+            userInput.value = '';
+            
+            // Show typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.classList.add('message', 'ai-message');
+            typingIndicator.id = 'typing-indicator';
+            typingIndicator.textContent = 'Searching trends...';
+            messagesContainer.appendChild(typingIndicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            try {
+                // Prepare context from chat history (last 10 messages)
+                const recentMessages = chatHistory.slice(-10).map(msg => {
+                    return {
+                        role: msg.role === 'user' ? 'user' : 'model',
+                        parts: [{ text: msg.content }]
+                    };
+                });
+                
+                // Add system prompt
+                const conversation = [
+                    {
+                        role: 'model',
+                        parts: [{ text: SYSTEM_PROMPT }]
+                    },
+                    ...recentMessages,
+                    {
+                        role: 'user',
+                        parts: [{ text: message }]
+                    }
+                ];
+                
+                // Prepare request
+                const requestBody = {
+                    contents: conversation,
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 2048
+                    }
+                };
+
+                // Send request to API
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
+                const data = await response.json();
+                let aiResponse = data.candidates[0].content.parts[0].text;
+                
+                // Format the response for better readability
+                aiResponse = formatChatbotResponse(aiResponse);
+
+                // Remove typing indicator
+                const typingIndicator = document.getElementById('typing-indicator');
+                if (typingIndicator) typingIndicator.remove();
+
+                // Add AI message to UI
+                addMessage('ai', aiResponse);
+
+                // Update chat history
+                chatHistory.push({ 
+                    role: 'user', 
+                    content: message,
+                    conversationId: new Date().toISOString().split('T')[0]
+                });
+                chatHistory.push({ 
+                    role: 'ai', 
+                    content: aiResponse,
+                    conversationId: new Date().toISOString().split('T')[0]
+                });
+                
+                saveChatHistory();
+                renderChatHistory();
+
+            } catch (error) {
+                console.error('Error:', error);
+                
+                // Remove typing indicator
+                const typingIndicator = document.getElementById('typing-indicator');
+                if (typingIndicator) typingIndicator.remove();
+                
+                // Show error message as AI message
+                addMessage('ai', "I'm sorry, but I encountered an error while searching for fashion trends. Please check your internet connection and try again.");
+                
+                // Show toast notification
+                showToast("Connection error. Please check your internet connection.");
             }
-        ];
-        
-        // Prepare request
-        const requestBody = {
-            contents: conversation,
-            generationConfig: {
-                temperature: 0.4,
-                maxOutputTokens: 2048
-            }
-        };
-        
-        // Make actual API call to Gemini
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestBody)
-        });
-        
-        if (!response.ok) {
-            throw new Error(`API request failed with status ${response.status}`);
         }
-        
-        const data = await response.json();
-        
-        // Extract the response text
-        let aiResponse = '';
-        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
-            aiResponse = data.candidates[0].content.parts[0].text;
-        } else {
-            throw new Error('Unexpected API response format');
-        }
-        
-        // Remove typing indicator
-        const indicator = document.getElementById('typing-indicator');
-        if (indicator) {
-            indicator.remove();
-        }
-        
-        // Add AI response to UI
-        addMessage('ai', aiResponse);
-        
-        // Save to chat history
-        saveMessage('user', message);
-        saveMessage('assistant', aiResponse);
-        
-        // Update history sidebar
-        renderChatHistory();
-        
-    } catch (error) {
-        console.error("Error:", error);
-        
-        // Remove typing indicator
-        const indicator = document.getElementById('typing-indicator');
-        if (indicator) {
-            indicator.remove();
-        }
-        
-        // Show error message
-        addMessage('ai', "I'm sorry, I encountered an error while processing your request. Please try again.");
-    }
-}
-        // Add Message to UI
-        function addMessage(type, content) {
+
+        // Add message to UI
+        function addMessage(sender, content) {
             const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', type === 'user' ? 'user-message' : 'ai-message');
+            messageDiv.classList.add('message', `${sender}-message`);
             
-            // Process content for special formatting (math, code)
-            let processedContent = content;
+            // Parse potential trend tags and format them
+            let formattedContent = content;
             
-            // Simple markdown-like processing for demo
-            // Format math expressions between $$ symbols
-            processedContent = processedContent.replace(/\$\$(.*?)\$\$/g, '<div class="formula">$1</div>');
+            // Check for fashion-related terms to highlight as trend tags
+            const fashionTerms = [
+                'bohemian', 'streetwear', 'Y2K', 'minimalist', 'maximalist', 
+                'cottagecore', 'athleisure', 'vintage', 'monochrome', 'sustainable',
+                'upcycled', 'oversized', 'retro', 'preppy', 'casual chic', 
+                , 'avant-garde', 'pastel', 'neon', 'earth tones'
+            ];
             
-            // Format code between ``` symbols
-            processedContent = processedContent.replace(/```(.*?)```/g, '<div class="code">$1</div>');
+            if (sender === 'ai') {
+                fashionTerms.forEach(term => {
+                    const regex = new RegExp(`\\b${term}\\b`, 'gi');
+                    formattedContent = formattedContent.replace(regex, `<span class="trend-tag">$&</span>`);
+                });
+            }
             
-            messageDiv.innerHTML = processedContent;
+            messageDiv.innerHTML = formattedContent;
             messagesContainer.appendChild(messageDiv);
-            
-            // Scroll to bottom
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
-        
-        // Save Message to History
-        function saveMessage(role, content) {
-            // Add to current chat history
-            chatHistory.push({
-                role: role,
-                content: content,
-                timestamp: new Date().toISOString()
-            });
+
+        // Save chat history to local storage
+        function saveChatHistory() {
+            // Group messages into conversations (by dates)
+            const conversationId = new Date().toISOString().split('T')[0];
+            const conversationIndex = chatHistory.findIndex(msg => msg.conversationId === conversationId);
             
-            // Save to localStorage
-            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
-        }
-        
-        // Find the last conversation (messages until there's a gap of more than 1 hour)
-        function findLastConversation() {
-            if (chatHistory.length === 0) return [];
-            
-            const conversation = [];
-            let lastTimestamp = new Date();
-            
-            // Start from the end and go backward
-            for (let i = chatHistory.length - 1; i >= 0; i--) {
-                const msgTime = new Date(chatHistory[i].timestamp);
-                const hoursDiff = (lastTimestamp - msgTime) / (1000 * 60 * 60);
-                
-                if (hoursDiff > 1 && conversation.length > 0) {
-                    break;
-                }
-                
-                conversation.unshift(chatHistory[i]);
-                lastTimestamp = msgTime;
+            if (conversationIndex === -1) {
+                // Add conversation ID to each message that doesn't have one
+                chatHistory.forEach(msg => {
+                    if (!msg.conversationId) {
+                        msg.conversationId = conversationId;
+                    }
+                });
             }
             
-            return conversation;
+            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
         }
-        
-        // Render Chat History in sidebar
+
+        // Render chat history in sidebar
         function renderChatHistory() {
             historyList.innerHTML = '';
             
-            // Group messages by conversation
-            const conversations = [];
-            let currentConvo = [];
-            let lastTimestamp = null;
-            
-            chatHistory.forEach((msg, index) => {
-                const msgTime = new Date(msg.timestamp);
-                
-                if (lastTimestamp && ((msgTime - lastTimestamp) / (1000 * 60 * 60) > 1)) {
-                    // If more than 1 hour gap, start new conversation
-                    if (currentConvo.length > 0) {
-                        conversations.push(currentConvo);
-                        currentConvo = [msg];
+            // Group messages by conversation ID
+            const conversations = {};
+            chatHistory.forEach(msg => {
+                if (msg.conversationId) {
+                    if (!conversations[msg.conversationId]) {
+                        conversations[msg.conversationId] = [];
                     }
-                } else {
-                    currentConvo.push(msg);
-                }
-                
-                lastTimestamp = msgTime;
-                
-                // Push the last conversation
-                if (index === chatHistory.length - 1 && currentConvo.length > 0) {
-                    conversations.push(currentConvo);
+                    conversations[msg.conversationId].push(msg);
                 }
             });
             
-            // Add conversation items to sidebar
-            conversations.forEach((convo, index) => {
-                if (convo.length === 0) return;
+            // Display the last message of each conversation (up to 10)
+            Object.keys(conversations).slice(-10).forEach(id => {
+                const conversation = conversations[id];
+                const firstUserMsg = conversation.find(msg => msg.role === 'user');
                 
-                // Find first user message as title, or use timestamp
-                let title = "Conversation";
-                for (const msg of convo) {
-                    if (msg.role === 'user') {
-                        title = msg.content.substring(0, 30);
-                        if (msg.content.length > 30) title += '...';
-                        break;
-                    }
+                if (firstUserMsg) {
+                    const historyItem = document.createElement('div');
+                    historyItem.classList.add('history-item');
+                    historyItem.dataset.id = id;
+                    
+                    // Format date
+                    const date = new Date(id);
+                    const formattedDate = date.toLocaleDateString();
+                    
+                    historyItem.innerHTML = `
+                        <strong>${formattedDate}</strong>: ${firstUserMsg.content.substring(0, 30)}${firstUserMsg.content.length > 30 ? '...' : ''}
+                    `;
+                    
+                    historyList.appendChild(historyItem);
                 }
-                
-                const date = new Date(convo[0].timestamp);
-                const dateStr = `${date.toLocaleDateString()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
-                
-                const historyItem = document.createElement('div');
-                historyItem.classList.add('history-item');
-                historyItem.dataset.id = index;
-                historyItem.textContent = `${title} (${dateStr})`;
-                historyList.appendChild(historyItem);
             });
         }
-        
-        // Load a specific conversation
-        function loadConversation(index) {
-            const conversations = [];
-            let currentConvo = [];
-            let lastTimestamp = null;
-            
-            chatHistory.forEach((msg, idx) => {
-                const msgTime = new Date(msg.timestamp);
-                
-                if (lastTimestamp && ((msgTime - lastTimestamp) / (1000 * 60 * 60) > 1)) {
-                    if (currentConvo.length > 0) {
-                        conversations.push(currentConvo);
-                        currentConvo = [msg];
+
+        // Find the last conversation
+        function findLastConversation() {
+            // Group messages by conversation ID
+            const conversations = {};
+            chatHistory.forEach(msg => {
+                if (msg.conversationId) {
+                    if (!conversations[msg.conversationId]) {
+                        conversations[msg.conversationId] = [];
                     }
-                } else {
-                    currentConvo.push(msg);
-                }
-                
-                lastTimestamp = msgTime;
-                
-                if (idx === chatHistory.length - 1 && currentConvo.length > 0) {
-                    conversations.push(currentConvo);
+                    conversations[msg.conversationId].push(msg);
                 }
             });
             
-            if (conversations[index]) {
-                // Clear current messages
-                messagesContainer.innerHTML = '';
-                
-                // Display selected conversation
-                conversations[index].forEach(msg => {
-                    addMessage(msg.role === 'user' ? 'user' : 'ai', msg.content);
-                });
-                
-                showToast('Conversation loaded');
+            // Get the last conversation
+            const conversationIds = Object.keys(conversations);
+            if (conversationIds.length > 0) {
+                const lastId = conversationIds[conversationIds.length - 1];
+                return conversations[lastId];
             }
-        }
-        
-        // Toggle Dark/Light Theme
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
             
-            if (document.body.classList.contains('dark-mode')) {
+            return null;
+        }
+
+        // Load a conversation by ID
+        function loadConversation(id) {
+            // Clear messages container
+            messagesContainer.innerHTML = '';
+            
+            // Filter messages by conversation ID
+            const conversation = chatHistory.filter(msg => msg.conversationId === id);
+            
+            // Render messages
+            conversation.forEach(msg => {
+                addMessage(msg.role === 'user' ? 'user' : 'ai', msg.content);
+            });
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            
+            if (isDarkMode) {
                 lightIcon.classList.add('hidden');
                 darkIcon.classList.remove('hidden');
                 themeText.textContent = 'Light Mode';
@@ -1057,46 +1019,58 @@ Key traits:
                 localStorage.setItem('theme', 'light');
             }
         }
-        
-        // Open Note Modal
+
+        // Open note modal
         function openNoteModal() {
             noteModal.classList.add('active');
         }
-        
-        // Close Modal
+
+        // Close modal
         function closeModal() {
             noteModal.classList.remove('active');
-            
-            // Clear form
-            document.getElementById('note-title').value = '';
-            document.getElementById('note-content').value = '';
         }
-        
-        // Handle Note Submit
+
+        // Handle note submission
         function handleNoteSubmit(e) {
             e.preventDefault();
             
-            const title = document.getElementById('note-title').value.trim();
-            const content = document.getElementById('note-content').value.trim();
+            const titleInput = document.getElementById('note-title');
+            const contentInput = document.getElementById('note-content');
             
-            if (title && content) {
-                const note = {
-                    id: Date.now().toString(),
-                    title,
-                    content,
-                    timestamp: new Date().toISOString()
-                };
-                
-                notes.push(note);
-                localStorage.setItem('notes', JSON.stringify(notes));
-                
-                renderNotes();
-                closeModal();
-                showToast('Note saved successfully!');
-            }
+            const title = titleInput.value.trim();
+            const content = contentInput.value.trim();
+            
+            if (!title || !content) return;
+            
+            // Create note object
+            const note = {
+                id: Date.now().toString(),
+                title,
+                content,
+                date: new Date().toLocaleDateString()
+            };
+            
+            // Add note
+            notes.push(note);
+            
+            // Save notes
+            localStorage.setItem('notes', JSON.stringify(notes));
+            
+            // Render notes
+            renderNotes();
+            
+            // Reset form
+            titleInput.value = '';
+            contentInput.value = '';
+            
+            // Close modal
+            closeModal();
+            
+            // Show toast notification
+            showToast('Fashion trend saved successfully!');
         }
-        
-        // Render Notes
+
+        // Render notes
         function renderNotes() {
             notesList.innerHTML = '';
             
@@ -1107,46 +1081,78 @@ Key traits:
                 
                 noteItem.innerHTML = `
                     <span>${note.title}</span>
-                    <button class="note-delete">&times;</button>
+                    <button class="note-delete">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                    </button>
                 `;
                 
                 notesList.appendChild(noteItem);
             });
         }
-        
-        // Delete Note
-        function deleteNote(id) {
-            notes = notes.filter(note => note.id !== id);
-            localStorage.setItem('notes', JSON.stringify(notes));
-            renderNotes();
-            showToast('Note deleted');
-        }
-        
-        // View Note
+
+        // View note
         function viewNote(id) {
             const note = notes.find(note => note.id === id);
+            
             if (note) {
-                // Add as AI message to chat
-                addMessage('ai', `<strong>Note: ${note.title}</strong><br><br>${note.content}`);
+                // Add user message
+                addMessage('user', `Show me details about the "${note.title}" trend`);
                 
+                // Add AI message with note content
+                addMessage('ai', `
+                    <strong>${note.title}</strong>
+                    <p><small>Saved on ${note.date}</small></p>
+                    <p>${note.content}</p>
+                `);
+                
+                // Update chat history
+                chatHistory.push({ 
+                    role: 'user', 
+                    content: `Show me details about the "${note.title}" trend`,
+                    conversationId: new Date().toISOString().split('T')[0]
+                });
+                chatHistory.push({ 
+                    role: 'ai', 
+                    content: `<strong>${note.title}</strong><p><small>Saved on ${note.date}</small></p><p>${note.content}</p>`,
+                    conversationId: new Date().toISOString().split('T')[0]
+                });
+                saveChatHistory();
+                renderChatHistory();
+                
+                // Hide sidebar on mobile
                 if (window.innerWidth <= 768) {
                     toggleSidebar();
                 }
             }
         }
-        
-        // Clear Chat
-        function clearChat() {
-            messagesContainer.innerHTML = '';
-            addMessage('ai', "I've cleared our conversation. What would you like to discuss now?");
+
+        // Delete note
+        function deleteNote(id) {
+            notes = notes.filter(note => note.id !== id);
             
-            // Don't clear history, just add a marker for new conversation
-            saveMessage('system', '--conversation-break--');
+            // Save notes
+            localStorage.setItem('notes', JSON.stringify(notes));
             
-            showToast('Chat cleared');
+            // Render notes
+            renderNotes();
+            
+            // Show toast notification
+            showToast('Fashion trend deleted!');
         }
-        
-        // Show Toast Notification
+
+        // Clear chat
+        function clearChat() {
+            // Clear messages container
+            messagesContainer.innerHTML = '';
+            
+            // Add welcome message
+            addMessage('ai', "Welcome to Fashion Trend Tracker! I'm your personal fashion assistant, here to keep you updated on the latest trends, styles, and fashion inspirations. Whether you're looking for outfit ideas, seasonal trends, or fashion advice, I'm here to help. What fashion topic would you like to explore today?");
+        }
+
+        // Show toast notification
         function showToast(message) {
             toast.textContent = message;
             toast.classList.add('show');
@@ -1155,13 +1161,13 @@ Key traits:
                 toast.classList.remove('show');
             }, 3000);
         }
-        
-        // Toggle Sidebar (mobile)
+
+        // Toggle sidebar
         function toggleSidebar() {
             sidebar.classList.toggle('active');
         }
-        
-        // Handle Window Resize
+
+        // Handle window resize
         function handleResize() {
             if (window.innerWidth <= 768) {
                 menuToggle.classList.remove('hidden');
@@ -1170,63 +1176,38 @@ Key traits:
                 sidebar.classList.remove('active');
             }
         }
-        
 
-        // Initialize on page load
-        window.addEventListener('DOMContentLoaded', init);
-        
-        // Add animation effects using GSAP-like custom animation library
-        document.addEventListener('DOMContentLoaded', () => {
-            // Logo pulse animation
-            const logo = document.querySelector('.logo svg');
-            setInterval(() => {
-                logo.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    logo.style.transform = 'scale(1)';
-                }, 500);
-            }, 2000);
-            
-            // Message entry animation
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                        mutation.addedNodes.forEach((node) => {
-                            if (node.classList && node.classList.contains('message')) {
-                                // Start with opacity 0 and transform
-                                node.style.opacity = '0';
-                                node.style.transform = node.classList.contains('user-message') 
-                                    ? 'translateX(20px)' 
-                                    : 'translateX(-20px)';
-                                
-                                // Animate in
-                                setTimeout(() => {
-                                    node.style.transition = 'all 0.3s ease';
-                                    node.style.opacity = '1';
-                                    node.style.transform = 'translateX(0)';
-                                }, 10);
-                            }
-                        });
-                    }
-                });
-            });
-            
-            observer.observe(messagesContainer, { childList: true });
-            
-            // Button hover effects
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseover', () => {
-                    btn.style.transform = 'translateY(-2px)';
-                    btn.style.boxShadow = '0 6px 8px -1px rgba(0, 0, 0, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.06)';
-                });
-                
-                btn.addEventListener('mouseout', () => {
-                    btn.style.transform = 'translateY(0)';
-                    btn.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
-                });
-            });
+        // Format chatbot responses to be shorter and more concise
+// Format chatbot responses to be shorter and more concise
+function formatChatbotResponse(rawText) {
+    // Add line breaks after each period (for sentences)
+    let formatted = rawText.replace(/\.\s+/g, ".<br>");
+    
+    // Also add line break after last sentence if it ends with a period
+    formatted = formatted.replace(/\.$/g, ".<br>");
+    
+    // Format Markdown-style to HTML
+    formatted = formatted
+        .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")        // Bold
+        .replace(/\*(.*?)\*/g, "<i>$1</i>")            // Italic
+        .replace(/(?:^|\n)[•*-] (.*?)(?=\n|$)/g, "<li>$1</li>"); // Bullet
+
+    // Wrap bullets in <ul> if any <li> exists
+    if (formatted.includes("<li>")) {
+        formatted = "<ul>" + formatted + "</ul>";
+    }
+
+    return formatted;
+}
+        // Trend prediction button click handler
+        document.getElementById('trend-prediction').addEventListener('click', function() {
+            const trendPrompt = "What is the hottest fashion trend right now that will be popular in the next season?";
+            userInput.value = trendPrompt;
+            chatForm.dispatchEvent(new Event('submit'));
         });
+
+        // Initialize the app
+        init();
     </script>
 </body>
 </html>
-</antArtifact>
